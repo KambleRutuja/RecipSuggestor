@@ -1,0 +1,74 @@
+﻿@model RecipSuggestor.ViewModel.RecipesViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+@{
+    List<int> list = (List<int>)Session["Key"];
+    List<int> reciddd = new List<int>();
+    int id;
+}
+
+<br />
+<centre><h3> selected Ingredients</h3></centre>
+
+@foreach (var item1 in list)
+{
+    foreach (var items in Model.Iiii)
+    {
+        int s3 = items.IngId;
+        if (item1 == s3)
+        {
+            <li>@Html.DisplayFor(m => items.IngName)</li>
+        }
+    }
+}
+
+@foreach (int iteming in list)
+{
+    foreach (var item in Model.RIttt)
+    {
+        int s2 = item.IngId;
+
+        if (iteming == s2)
+        {
+            id = item.RecId;
+            reciddd.Add(id);
+        }
+    }
+}
+
+@{ List<int> li = reciddd.Distinct().ToList();
+   string link; 
+}
+
+<centre><h3> Suggested Recipes </h3></centre>
+<table class="table" align="center">
+        <tbody>
+        @foreach (var newrecid in li)
+        {
+            foreach (var rec in Model.Rrrr)
+            {
+                int s2 = rec.RecId;
+                link = rec.RecLink.ToString();
+
+                if (newrecid == s2)
+                {
+                    <tr class="tab-pane" style="column-span:all;align-self:center;align-items:center;">
+                        <td class="table-active"><b> @Html.DisplayFor(m => rec.RecName) </b></td>
+                        <td class="table-active"></td>
+                    </tr>
+                    <tr class="tab-pane" style="column-span:all;align-self:center;align-items:center;">
+                        <td class="table-active"></td>
+                        <td class="table-active">
+                            <iframe width="680" height="325" src=@link frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                            </iframe>
+                        </td>
+                    </tr>
+                }
+            }
+        }
+
+    </tbody>
+</table>
+
